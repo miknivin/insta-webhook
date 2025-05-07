@@ -139,6 +139,10 @@ export async function POST(request) {
         // Handle direct messages (messaging field)
         if (entry.messaging) {
           for (const messagingEvent of entry.messaging) {
+            if (!messagingEvent.sender?.id || !messagingEvent.recipient?.id) {
+              console.log("Skipping message: Missing sender or recipient ID");
+              continue;
+            }
             // Log whether the message is an echo
             console.log(
               `Message is echo: ${!!messagingEvent.message?.is_echo}`
