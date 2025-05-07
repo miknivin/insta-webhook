@@ -62,6 +62,7 @@ export async function POST(request) {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${AISENSY_API_KEY}`,
             },
             body: JSON.stringify({
               apiKey: AISENSY_API_KEY,
@@ -138,11 +139,10 @@ export async function POST(request) {
         // Handle direct messages (messaging field)
         if (entry.messaging) {
           for (const messagingEvent of entry.messaging) {
-            // Skip echo messages if desired (optional)
-            if (messagingEvent.message?.is_echo) {
-              console.log("Skipping echo message:", messagingEvent.message.mid);
-              continue;
-            }
+            // Log whether the message is an echo
+            console.log(
+              `Message is echo: ${!!messagingEvent.message?.is_echo}`
+            );
 
             const messageData = {
               senderId: messagingEvent.sender.id,
