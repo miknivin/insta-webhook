@@ -25,7 +25,7 @@ export async function POST(request) {
     if (language === "english") {
       await sendWhatsAppMessage(
         phone,
-        "customer_enquiry_eng",
+        "customer_enquiry_eng_2",
         [], // no template params
         name,
         {} // empty media
@@ -34,7 +34,7 @@ export async function POST(request) {
       //english
       await sendWhatsAppMessage(
         phone,
-        "customer_enquiry_mal",
+        "customer_enquiry_mal_2",
         [], // no template params
         name,
         {} // empty media
