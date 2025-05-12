@@ -7,7 +7,10 @@ export async function POST(request) {
     const phone = searchParams.get("phone");
     const name = searchParams.get("name");
     const address = searchParams.get("address");
-    console.log(request.body, "body");
+    const language = searchParams.get("language");
+    console.log(language, "language");
+
+    //console.log(request.body, "body");
 
     // if (!phone || !name) {
     //   return NextResponse.json(
@@ -19,18 +22,29 @@ export async function POST(request) {
     // Template parameters for second message
     const templateParams = [name, phone, address];
 
+    if (language === "english") {
+      await sendWhatsAppMessage(
+        phone,
+        "customer_enquiry_eng",
+        [], // no template params
+        name,
+        {} // empty media
+      );
+    } else {
+      //english
+      await sendWhatsAppMessage(
+        phone,
+        "customer_enquiry_mal",
+        [], // no template params
+        name,
+        {} // empty media
+      );
+    }
     // First WhatsApp message
-    await sendWhatsAppMessage(
-      phone,
-      "cust_enquire_mal",
-      [], // no template params
-      name,
-      {} // empty media
-    );
 
     // Internal lead notification
     await sendWhatsAppMessage(
-      "9567678465",
+      process.env.TESTPHONE,
       "new lead message",
       templateParams,
       "sytro",
