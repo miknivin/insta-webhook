@@ -44,7 +44,7 @@ export async function POST(request) {
 
     // Internal lead notification
     await sendWhatsAppMessage(
-      process.env.TESTPHONE,
+      process.env.PHONE.trim().toString(),
       "new lead message",
       templateParams,
       "sytro",
