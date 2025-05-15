@@ -10,7 +10,8 @@ export async function POST(request) {
     const language = searchParams.get("language");
     console.log(language, "language");
 
-    console.log(request.body, "body");
+    const body = await request.json();
+    console.log(body, "req body");
 
     // if (!phone || !name) {
     //   return NextResponse.json(
